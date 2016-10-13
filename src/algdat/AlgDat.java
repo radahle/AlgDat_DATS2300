@@ -17,11 +17,5 @@ import java.util.stream.Stream;
 public class AlgDat {
     
     public static void main(String... args) {
-        BinTre<String> tre = new BinTre<>();
-        tre.leggInn(1, "A");
-        
-        int posisjon = 1234;
-        System.out.println(tre.antall());
-        
     }
 }
