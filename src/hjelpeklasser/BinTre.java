@@ -39,6 +39,11 @@ public class BinTre<T> // et generisk binærtre
         rot = null;
         antall = 0;
     }          // konstruktør
+    
+   /* private Node<T> finnNode(int posisjon) {
+        if (posisjon < 1) return 0;
+    }*/
+    
 
     public final void leggInn(int posisjon, T verdi) {
        if (posisjon < 1) throw new IllegalArgumentException("posisjon (" + posisjon + ") er < 1!");

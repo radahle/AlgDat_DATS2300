@@ -461,12 +461,14 @@ public class Tabell {
 
     private static void kvikksortering0(int[] a, int v, int h) // en privat metode
     {
-        if (h - v < 20) {
+        System.out.println("Kallet med [" + v + ":" + h + "] starter!");
+        if (v >= h) {
             return;   // stopper på 20, men andre verdier kan være bedre
         }
         int k = sParter0(a, v, h, (v + h) / 2);  // bruker midtverdien
-        kvikksortering0(a, v, k - 1);          // sorterer intervallet a[v:k-1]
-        kvikksortering0(a, k + 1, h);          // sorterer intervallet a[k+1:h]
+        if (v < k - 1) kvikksortering0(a, v, k - 1);          // sorterer intervallet a[v:k-1]
+        if (k + 1 < h) kvikksortering0(a, k + 1, h);          // sorterer intervallet a[k+1:h]
+        System.out.println("Kallet med [" + v + ":" + h + "] er ferdig!");
     }
 
     public static void kvikksortering(int[] a, int fra, int til) // a[fra:til>
@@ -478,7 +480,7 @@ public class Tabell {
 
     public static void kvikksortering(int[] a) // sorterer hele tabellen
     {
-        kvikksortering0(a, 0, a.length - 1);
+        if (a.length > 1) kvikksortering0(a, 0, a.length - 1);
         innsettingssortering(a);  // avslutter med innsettingssortering
     }
 
