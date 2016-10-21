@@ -115,30 +115,17 @@ public class TabellListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         Objects.requireNonNull(verdi, "null er ulovlig!");
 
-        if (verdi == null) {
-            return false;
-        }
-
         for (int i = 0; i < antall; i++) {
             if (a[i].equals(verdi)) {
-                for (int j = i; j < antall - 1; j++) {
-                    a[j] = a[j + 1];
-                }
+                antall--;
+                System.arraycopy(a, i + 1, a, i, antall - i);
 
                 a[antall] = null;
+
                 return true;
             }
         }
         return false;
-        
-
-        /* if (!inneholder(verdi)) {       // sjekker om listen inneholder verdien
-            return false;               // returnerer false om den ikke inneholder verdien
-        } else {
-            fjern(indeksTil(verdi));    // sjekker indeks til verdien om den eksisterer, og så fjernes den.
-            antallEndringer++;
-            return true;
-        }*/
     }
 
     @Override
