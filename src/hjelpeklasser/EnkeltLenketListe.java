@@ -1,5 +1,6 @@
 package hjelpeklasser;
 
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -371,6 +372,28 @@ public class EnkeltLenketListe<T> implements Liste<T>, Kø<T> {
             p = p.neste;
         }
     }
+    
+   /* public static <T> void sorter(Kø<T> kø, Stakk<T> stakk, Comparator<? super T> c) {
+        int n = kø.antall();
+        
+        while (n > 0) {
+           stakk.leggInn(kø.taUt());    // kandidat for å være den største
+           
+           for (int i = 1; i < n; i++) {
+               T verdi = kø.taUt();
+               if (c.compare(verdi, stakk.kikk()) > 0) {
+                   kø.leggInn(stakk.taUt());    // fant en som var større - den
+                   stakk.leggInn(verdi);        // legges æverst på stakken
+               } else {
+                   kø.leggInn(verdi);
+               }
+           }
+           n--;
+        }
+        while (!stakk.tom()) {
+            kø.leggInn(stakk.taUt());   // flytter fra stakk til kø
+        }
+    } */
 
     @Override
     public String toString() {

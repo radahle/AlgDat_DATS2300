@@ -29,12 +29,17 @@ public class TabellKø<T> implements Kø<T> {
     public TabellKø() {
         this(8);
     }
-    
+
     private T[] utvid(int nystørrelse) {
         @SuppressWarnings("unchecked")
         T[] b = (T[]) new Object[nystørrelse];
+
+        // kopierer intervallet a[fra:a.length> over i b
         System.arraycopy(a, fra, b, 0, a.length - fra);
+
+        // Kopierer intervallet a[0:fra> over i b
         System.arraycopy(a, 0, b, a.length - fra, fra);
+
         fra = 0;
         til = a.length;
         return b;
@@ -48,7 +53,7 @@ public class TabellKø<T> implements Kø<T> {
         }
 
         if (fra == til) {
-        a = utvid(2*a.length);
+            a = utvid(2 * a.length);
         }
         return true;
     }
@@ -87,7 +92,40 @@ public class TabellKø<T> implements Kø<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while (fra != til) {
+            a[fra++] = null;
+            if (fra == a.length) {
+                fra = 0;
+            }
+        }
+    }
+
+    public int indeksTil(T verdi) {
+        int k = fra;
+
+        while (k != til) {
+            if (verdi.equals(a[k])) {
+                return fra <= k ? k - fra : a.length + k - fra;
+            }
+
+            k++;
+            if (k == a.length) {
+                k = 0;
+            }
+        }
+        return -1;  // ikke funnet
+    }
+    
+    public static <T> void snu(Stakk<T> A) {
+        Kø<T> B = new TabellKø<T>();
+        while (!A.tom()) B.leggInn(A.taUt());
+        while (!B.tom()) A.leggInn(B.taUt());
+    }
+    
+    public static <T> void snu(Kø<T> A) {
+        Stakk<T> B = new TabellStakk<T>();
+        while (!A.tom()) B.leggInn(A.taUt());
+        while (!B.tom()) A.leggInn(B.taUt());
     }
 
     public String toString() {
